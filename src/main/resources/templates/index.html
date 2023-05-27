@@ -14,13 +14,13 @@
         </tr>
         </thead>
         <tbody>
-<!--        <tr th:each="student : ${students}" th:style="${student.exam < 50?'color: red':''}">-->
-<!--            <th scope="row" th:text="${student.id}" ></th>-->
-<!--            <td th:text="${student.name}"></td>-->
-<!--            <td th:text="${student.surname}"></td>-->
-<!--            <td th:text="${student.exam}"></td>-->
-<!--            <td th:text="${student.mark}"></td>-->
-<!--        </tr>-->
+        <tr th:each="request : ${requests}" >
+            <th scope="row" th:text="${request.id}" ></th>
+            <td th:text="${request.userName}"></td>
+            <td th:text="${request.phone}"></td>
+            <td th:text="${request.course.name}"></td>
+            <td th:text="${request.handled}"></td>
+        </tr>
 
         </tbody>
     </table>
