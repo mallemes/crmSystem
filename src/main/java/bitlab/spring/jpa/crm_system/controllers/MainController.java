@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -37,5 +38,16 @@ public class MainController {
     public String addRequest(ApplicationRequest request) {
         requestService.save(request);
         return "redirect:/";
+    }
+    @GetMapping("/request-details/{musicId}")
+    public String requestDetails(@PathVariable Long musicId ,Model model){
+        List<ApplicationCourse> courses = courseService.allCourses();
+        ApplicationRequest request = requestService.getRequestById(musicId);
+        if (request == null){
+            return "pageNotFound";
+        }
+        model.addAttribute("request", request);
+        model.addAttribute("courses", courses);
+        return "request-detail";
     }
 }
