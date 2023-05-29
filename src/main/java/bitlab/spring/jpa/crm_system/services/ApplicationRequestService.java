@@ -22,4 +22,7 @@ public class ApplicationRequestService {
     public void save(ApplicationRequest request){
         applicationRequestRepository.save(request);
     }
+    public  void deleteRequest(Long id){
+        applicationRequestRepository.deleteById(id);
+    }
 }
