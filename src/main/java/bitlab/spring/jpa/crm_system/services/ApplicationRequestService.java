@@ -25,4 +25,9 @@ public class ApplicationRequestService {
     public  void deleteRequest(Long id){
         applicationRequestRepository.deleteById(id);
     }
+    public ApplicationRequest findRequest(Long id){
+        return  applicationRequestRepository.findById(id).orElse(null);
+    }
+
+
 }

@@ -36,29 +36,35 @@ public class MainController {
 
     @PostMapping("/add-request")
     public String addRequest(ApplicationRequest request) {
+        request.setHandled(true);
         requestService.save(request);
         return "redirect:/";
     }
+
     @GetMapping("/request-details/{requestId}")
-    public String requestDetails(@PathVariable Long requestId ,Model model){
+    public String requestDetails(@PathVariable Long requestId, Model model) {
         List<ApplicationCourse> courses = courseService.allCourses();
         ApplicationRequest request = requestService.getRequestById(requestId);
-        if (request == null){
+        if (request == null) {
             return "pageNotFound";
         }
         model.addAttribute("request", request);
         model.addAttribute("courses", courses);
         return "request-detail";
     }
+
     @PostMapping("/delete-request/{requestId}")
-    public  String deleteRequest(@PathVariable Long requestId){
+    public String deleteRequest(@PathVariable Long requestId) {
         requestService.deleteRequest(requestId);
         return "redirect:/";
     }
-    @PostMapping("/update/request")
-    public  String updateRequest(ApplicationRequest request){
-        request.setHandled(true);
-        requestService.save(request);
+
+    @PostMapping("/update-request")
+    public String updateRequest(ApplicationRequest request) {
+        if (request != null) {
+            request.setHandled(false);
+            requestService.save(request);
+        }
         return "redirect:/";
     }
 
